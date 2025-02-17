@@ -2,7 +2,7 @@ name: Build Check
 run-name: Running Java build
 on:
   - push
-  - pr
+  - pull_requests
 
 jobs:
   setup:

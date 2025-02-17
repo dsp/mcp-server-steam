@@ -28,6 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: mvn --verison
+      - run: mvn --version
       - run: javac --version
       - run: mvn compile

@@ -3,10 +3,12 @@ package net.experimentalworks;
 import java.util.List;
 
 import com.lukaspradel.steamapi.core.exception.SteamApiException;
-import com.lukaspradel.steamapi.data.json.ownedgames.Game;
 import com.lukaspradel.steamapi.data.json.ownedgames.GetOwnedGames;
+import com.lukaspradel.steamapi.data.json.recentlyplayedgames.GetRecentlyPlayedGames;
 import com.lukaspradel.steamapi.webapi.client.SteamWebApiClient;
 import com.lukaspradel.steamapi.webapi.request.GetOwnedGamesRequest;
+import com.lukaspradel.steamapi.webapi.request.GetRecentlyPlayedGamesRequest;
+import com.lukaspradel.steamapi.webapi.request.builders.SteamWebApiRequestFactory;
 
 public class SteamGames {
 
@@ -18,16 +20,26 @@ public class SteamGames {
 
   public GetOwnedGames getOwnedGames(String steamId) throws SteamApiException {
     GetOwnedGamesRequest request =
-        new GetOwnedGamesRequest.GetOwnedGamesRequestBuilder(steamId)
-            .includeAppInfo(true)
-            .includePlayedFreeGames(true)
-            .buildRequest();
+        SteamWebApiRequestFactory.createGetOwnedGamesRequest(steamId, true, true, List.of());
+    return client.processRequest(request);
+  }
+
+  public GetRecentlyPlayedGames getRecentlyPlayedGames(String steamId) throws SteamApiException {
+    GetRecentlyPlayedGamesRequest request =
+        SteamWebApiRequestFactory.createGetRecentlyPlayedGamesRequest(steamId);
 
     return client.processRequest(request);
   }
 
-  public List<Game> getGames(String steamId) throws SteamApiException {
+  public List<com.lukaspradel.steamapi.data.json.ownedgames.Game> getGames(String steamId)
+      throws SteamApiException {
     GetOwnedGames ownedGames = getOwnedGames(steamId);
     return ownedGames.getResponse().getGames();
+  }
+
+  public List<com.lukaspradel.steamapi.data.json.recentlyplayedgames.Game> getRecentlyGames(
+      String steamId) throws SteamApiException {
+    GetRecentlyPlayedGames recentGames = getRecentlyPlayedGames(steamId);
+    return recentGames.getResponse().getGames();
   }
 }

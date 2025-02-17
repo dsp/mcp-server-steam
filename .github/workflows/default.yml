@@ -1,5 +1,5 @@
 name: Build Check
-run-name: Running Java build
+run-name: Push and PR checks
 on:
   - push
   - pull_request
@@ -20,10 +20,12 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: mvn spotless:check
 
   build:
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: mvn compile

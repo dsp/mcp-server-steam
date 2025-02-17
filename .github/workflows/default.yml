@@ -6,7 +6,6 @@ on:
 
 jobs:
   checks:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,7 +19,6 @@ jobs:
       - run: mvn spotless:check
 
   build:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

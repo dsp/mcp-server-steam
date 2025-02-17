@@ -1,8 +1,18 @@
 # MCP Steam Server
 
+[![smithery badge](https://smithery.ai/badge/@dsp/mcp-server-steam)](https://smithery.ai/server/@dsp/mcp-server-steam)
+
 A Model Context Protocol (MCP) server that provides Steam gaming context to AI assistants. This service integrates with the Steam API to fetch user gaming information and exposes it through the MCP protocol, allowing AI assistants to access and understand users' gaming activities and preferences.
 
 ## Installation
+
+### Installing via Smithery
+
+To install Steam Gaming Context Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@dsp/mcp-server-steam):
+
+```bash
+npx -y @smithery/cli install @dsp/mcp-server-steam --client claude
+```
 
 ### Using Docker (Recommended)
 

@@ -4,12 +4,12 @@
       version = "1.4.0";
 system = "x86_64-linux";
 devenv_root = "/home/dsp/src/mcp-steam";
-devenv_dotfile = ./.devenv;
-devenv_dotfile_string = ".devenv";
+devenv_dotfile = ./.devenv.IxTAW286f8ac;
+devenv_dotfile_string = ".devenv.IxTAW286f8ac";
 container_name = null;
 devenv_tmpdir = "/run/user/1000";
-devenv_runtime = "/run/user/1000/devenv-f493d9c";
-devenv_istesting = false;
+devenv_runtime = "/run/user/1000/devenv-970fde5";
+devenv_istesting = true;
 devenv_direnvrc_latest_version = 1;
 
         in {
@@ -27,12 +27,12 @@ devenv_direnvrc_latest_version = 1;
           version = "1.4.0";
 system = "x86_64-linux";
 devenv_root = "/home/dsp/src/mcp-steam";
-devenv_dotfile = ./.devenv;
-devenv_dotfile_string = ".devenv";
+devenv_dotfile = ./.devenv.IxTAW286f8ac;
+devenv_dotfile_string = ".devenv.IxTAW286f8ac";
 container_name = null;
 devenv_tmpdir = "/run/user/1000";
-devenv_runtime = "/run/user/1000/devenv-f493d9c";
-devenv_istesting = false;
+devenv_runtime = "/run/user/1000/devenv-970fde5";
+devenv_istesting = true;
 devenv_direnvrc_latest_version = 1;
 
             devenv =

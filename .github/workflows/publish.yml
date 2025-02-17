@@ -39,8 +39,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          build-args:
-           - VERSION=${GITHUB_REF#refs/tags/}
+          build-args: |
+            VERSION=${GITHUB_REF#refs/tags/}
           context: .
           push: true
           tags: |

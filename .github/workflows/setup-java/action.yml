@@ -1,0 +1,25 @@
+name: 'Setup Java'
+description: 'Sets up Java and Maven cache'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        architecture: x64
+
+    # Handle Maven cache separately with a more reliable key strategy
+    - shell: bash
+      id: cache-key
+      run: |
+        echo "timestamp=$(date -u +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
+        echo "hash=$(echo ${{ hashFiles('**/pom.xml') }})" >> $GITHUB_OUTPUT
+
+    - uses: actions/cache@v3
+      id: maven-cache
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ steps.cache-key.outputs.hash }}
+        restore-keys: |
+          ${{ runner.os }}-maven-

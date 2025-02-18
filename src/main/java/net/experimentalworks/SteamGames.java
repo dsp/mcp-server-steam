@@ -1,6 +1,7 @@
 package net.experimentalworks;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.lukaspradel.steamapi.core.exception.SteamApiException;
 import com.lukaspradel.steamapi.data.json.ownedgames.GetOwnedGames;
@@ -31,15 +32,23 @@ public class SteamGames {
     return client.processRequest(request);
   }
 
-  public List<com.lukaspradel.steamapi.data.json.ownedgames.Game> getGames(String steamId)
-      throws SteamApiException {
+  public List<Game> getGames(String steamId) throws SteamApiException {
     GetOwnedGames ownedGames = getOwnedGames(steamId);
-    return ownedGames.getResponse().getGames();
+    return ownedGames.getResponse().getGames().stream()
+        .map(game -> new Game(game.getAppid(), game.getName(), game.getPlaytimeForever()))
+        .collect(Collectors.toList());
   }
 
-  public List<com.lukaspradel.steamapi.data.json.recentlyplayedgames.Game> getRecentlyGames(
-      String steamId) throws SteamApiException {
+  public List<Game> getRecentlyGames(String steamId) throws SteamApiException {
     GetRecentlyPlayedGames recentGames = getRecentlyPlayedGames(steamId);
-    return recentGames.getResponse().getGames();
+    return recentGames.getResponse().getGames().stream()
+        .map(
+            game ->
+                new Game(
+                    game.getAppid(),
+                    game.getName(),
+                    game.getPlaytimeForever(),
+                    game.getPlaytime2weeks()))
+        .collect(Collectors.toList());
   }
 }

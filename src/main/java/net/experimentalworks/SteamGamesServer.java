@@ -23,9 +23,13 @@ public class SteamGamesServer {
   private final McpAsyncServer server;
 
   public SteamGamesServer(ServerMcpTransport transport) {
+    String version = getClass().getPackage().getImplementationVersion();
+    if (version == null) {
+      version = "1.0.0"; // Fallback version if not found
+    }
     this.server =
         McpServer.async(transport)
-            .serverInfo("steam-games", "1.0.0")
+            .serverInfo("steam-games", version)
             .capabilities(ServerCapabilities.builder().tools(true).logging().build())
             .build();
   }
@@ -52,7 +56,7 @@ public class SteamGamesServer {
             """
             Get a comprehensive list of all games owned by the specified Steam user, including their total playtime in minutes.
             This includes all games in their Steam library, both installed and uninstalled, free and purchased. For each game,
-            returns details like the game name, AppID, total playtime, and whether they've played it recently. The data comes
+            returns details like the game name, AppID, total playtime (in minutes), and whether they've played it recently. The data comes
             directly from Steam's official API using the provided Steam ID.
             """,
             schema);
@@ -90,9 +94,9 @@ public class SteamGamesServer {
             "get-recent-games",
             """
             Retrieve a list of recently played games for the specified Steam user, including playtime
-            details from the last 2 weeks. This tool fetches data directly from Steam's API using the
+            details from the last 2 weeks (in minutes). This tool fetches data directly from Steam's API using the
             provided Steam ID and returns information like game names, AppIDs, and recent playtime
-            statistics. The results only include games that have been played in the recent time period,
+            statistics in minutes. The results only include games that have been played in the recent time period,
             making it useful for tracking current gaming activity and habits.
             """,
             schema);

@@ -25,6 +25,7 @@ replay_pid*
 
 # Devenv and Maven
 target/
-.devenv/
 
 *.swp
+.devenv.flake.nix
+.devenv/
